@@ -1,0 +1,55 @@
+  {% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">-->
+<!--    <link rel="stylesheet" href="{% static 'css/elegant-icons.css' %}" type="text/css">-->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+</head>
+<body>
+<div class="shell">
+	<div class="border">
+
+		<div id="navigation">
+			<ul>
+			    <li><a href="/" class="active">Головна</a></li>
+			    <li><a href="/admin">Адмін панель</a></li>
+
+			</ul>
+		</div>
+        <div id="main">
+			<div id="content" class="left">
+
+				<div class="projects">
+					<h3>Публікації</h3>
+					{% for post in post_list %}
+					<div class="item">
+						<div class="image left">
+							<img src="{{ post.img.url }}" width="200px"/>
+						</div>
+						<div class="text left">
+							<h3><a href="{{ post.id }}">{{ post.title }}</a> </h3>
+							<p>{{ post.description }}</p>
+							<p>{{ post.author }}</p>
+						</div>
+						<div class="cl">&nbsp;</div>
+					</div>
+					{% endfor %}
+
+
+				</div>
+			</div>
+
+			<div class="cl">&nbsp;</div>
+		</div>
+
+
+	</div>
+
+	<div id="footer">
+		<p class="copy right">Copyright &copy;  2022 </p>
+	</div>
+</div>
+</body>
+</html>

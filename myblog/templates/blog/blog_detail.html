@@ -1,0 +1,90 @@
+  {% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">-->
+<!--    <link rel="stylesheet" href="{% static 'css/elegant-icons.css' %}" type="text/css">-->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+</head>
+<body>
+<div class="shell">
+	<div class="border">
+
+		<div id="navigation">
+			<ul>
+			    <li><a href="/" class="active">Головна</a></li>
+			    <li><a href="/admin">Адмін панель</a></li>
+
+			</ul>
+		</div>
+        <div id="main">
+			<div id="content" class="left">
+
+				<div class="projects">
+					<h3>{{ post.title }}</h3>
+                <p align="center">
+                    <img src="{{ post.img.url }}" width="50%"/>
+
+                </p>
+					<div class="item">
+						<div class="text left">
+
+        <p>{{ post.description }}</p>
+        {{ post.author }}
+						</div>
+						<div class="cl">&nbsp;</div>
+					</div>
+
+				</div>
+			</div>
+			<div>
+				<br>
+				<p>Likes: {{ post.likes_set.all.count }}</p>
+				<br>
+				<a href="{% url 'add_likes' post.id %}">Подобається</a>
+				<a href="{% url 'del_likes' post.id %}">Не подобається</a>
+			</div>
+			<div class="form-comment">
+				<h3>Залишити коментар</h3>
+				<div>
+					<form action="{% url 'add_comments' post.id %}" method="post">
+						{% csrf_token %}
+						<div>
+						<label>Ваш коментар</label>
+						<textarea name="text_comments"></textarea>
+						</div>
+						<div>
+							<label>Iм'я</label>
+							<input type="text" name="name">
+						</div>
+						<div>
+							<label>Email</label>
+							<input type="email" name="email">
+						</div>
+<!--							<input type="submit">-->
+							<div><button>Надіслати</button></div>
+
+					</form>
+				</div>
+			</div>
+			<div>
+				{% for comment in post.comments_set.all %}
+				<div class="view-comment">
+					<h4>{{ comment.name }}</h4>
+					<p>
+						{{ comment.text_comments }}
+					</p>
+				</div>
+				{% endfor %}
+			</div>
+			<div class="cl">&nbsp;</div>
+		</div>
+	</div>
+
+	<div id="footer">
+		<p class="copy right">Copyright &copy;  2022 </p>
+	</div>
+</div>
+</body>
+</html>
